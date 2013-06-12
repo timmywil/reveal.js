@@ -321,6 +321,8 @@ getElementsBySelector: function(filter){
 							&lt;style scoped&gt;
 							/* will not match #outside-scope */
 							article { background: green; }
+							/* same as */
+							:scope article { background: green; }
 							&lt;/style&gt;
 							&lt;article id="inside-scope"&gt;&lt;/article&gt;
 						&lt;/section&gt;
@@ -332,11 +334,20 @@ getElementsBySelector: function(filter){
 					</section>
 				</section>
 
+				<section data-markdown id="scope-no-siblings">
+					## Limited to descendants _only_
+					```js
+					elem.querySelectorAll(":scope + div");
+					```
+					This doesn't return anything.
+				</section>
+
 				<section id="findAll">
 					<h1>findAll</h1>
 				</section>
 
 				<section id="replace-sizzle">
+					<h2>The New Sizzle</h2>
 					<pre class="fragment grow"><code>
 jQuery.find = function( selector, context ) {
 	return context.findAll( selector );
